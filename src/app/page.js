@@ -115,111 +115,112 @@ export default function Home() {
 
       {/* Hero Section */}
       <motion.section
-        id="home"
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ duration: 0.8 }}
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
+  id="home"
+  initial={{ opacity: 0 }}
+  animate={{ opacity: 1 }}
+  transition={{ duration: 0.8 }}
+  className="relative min-h-screen flex items-center justify-center overflow-hidden"
+>
+  {/* Background Elements - Optimized for mobile */}
+  <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-accent/5"></div>
+  <div className="absolute top-10 left-2 sm:top-20 sm:left-10 opacity-5 text-[3rem] sm:text-[6rem] lg:text-[12rem] font-black select-none pointer-events-none">
+    BEARINGS
+  </div>
+  <div className="absolute bottom-10 right-2 sm:bottom-20 sm:right-10 opacity-5 text-[3rem] sm:text-[6rem] lg:text-[12rem] font-black select-none pointer-events-none">
+    QUALITY
+  </div>
+  
+  <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 relative z-10">
+    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
+      <motion.div
+        initial={{ opacity: 0, x: -50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.2 }}
+        className="space-y-6 sm:space-y-8 text-center lg:text-left"
       >
-        {/* Background Elements */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-accent/5"></div>
-        <div className="absolute top-20 left-10 opacity-5 text-[8rem] lg:text-[12rem] font-black select-none pointer-events-none">
-          BEARINGS
+        <div className="space-y-4">
+          <motion.div
+            initial={{ opacity: 0, scale: 0.8 }}
+            animate={{ opacity: 1, scale: 1 }}
+            transition={{ duration: 0.6, delay: 0.4 }}
+            className="flex items-center justify-center lg:justify-start space-x-2"
+          >
+            <Badge className="bg-gradient-to-r from-primary to-accent text-white text-xs sm:text-sm px-3 py-1">
+              Premium Quality Since 1998
+            </Badge>
+          </motion.div>
+          
+          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight">
+            <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+              Jay Khodiyar
+            </span>
+            <br />
+            <span className="text-foreground">Bearings</span>
+          </h1>
+          
+          <p className="text-lg sm:text-xl text-muted-foreground max-w-lg leading-relaxed mx-auto lg:mx-0">
+            Your trusted partner for premium industrial bearings. We supply genuine bearings from world&apos;s leading manufacturers with 25+ years of expertise.
+          </p>
         </div>
-        <div className="absolute bottom-20 right-10 opacity-5 text-[8rem] lg:text-[12rem] font-black select-none pointer-events-none">
-          QUALITY
+
+        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+          <Button size="lg" className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white w-full sm:w-auto">
+            <Link href="/products" className="flex items-center justify-center">
+              Explore Products
+              <ArrowRight className="w-4 h-4 ml-2" />
+            </Link>
+          </Button>
+          <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary hover:text-white w-full sm:w-auto">
+            <Link href="/contact">Get Quote</Link>
+          </Button>
         </div>
-        
-        <div className="container mx-auto px-4 py-20 relative z-10">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
+
+        {/* Stats - Mobile optimized grid */}
+        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto lg:mx-0">
+          {stats.map((stat, index) => (
             <motion.div
-              initial={{ opacity: 0, x: -50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.2 }}
-              className="space-y-8"
+              key={index}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+              className="text-center p-2 sm:p-3 rounded-lg bg-muted/50"
             >
-              <div className="space-y-4">
-                <motion.div
-                  initial={{ opacity: 0, scale: 0.8 }}
-                  animate={{ opacity: 1, scale: 1 }}
-                  transition={{ duration: 0.6, delay: 0.4 }}
-                  className="flex items-center space-x-2"
-                >
-                  <Badge className="bg-gradient-to-r from-primary to-accent text-white">
-                    Premium Quality Since 1998
-                  </Badge>
-                </motion.div>
-                
-                <h1 className="text-4xl md:text-5xl lg:text-6xl font-black leading-tight">
-                  <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
-                    Jay Khodiyar
-                  </span>
-                  <br />
-                  <span className="text-foreground">Bearings</span>
-                </h1>
-                
-                <p className="text-xl text-muted-foreground max-w-lg leading-relaxed">
-                  Your trusted partner for premium industrial bearings. We supply genuine bearings from world&apos;s leading manufacturers with 25+ years of expertise.
-                </p>
+              <div className="flex justify-center mb-1 text-primary text-sm sm:text-base">
+                {stat.icon}
               </div>
-
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white">
-                  <Link href="/products" className="flex items-center">
-                    Explore Products
-                    <ArrowRight className="w-4 h-4 ml-2" />
-                  </Link>
-                </Button>
-                <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary hover:text-white">
-                  <Link href="/contact">Get Quote</Link>
-                </Button>
-              </div>
-
-              {/* Stats */}
-              <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-                {stats.map((stat, index) => (
-                  <motion.div
-                    key={index}
-                    initial={{ opacity: 0, y: 20 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-                    className="text-center p-3 rounded-lg bg-muted/50"
-                  >
-                    <div className="flex justify-center mb-1 text-primary">
-                      {stat.icon}
-                    </div>
-                    <div className="text-2xl font-bold text-primary">{stat.number}</div>
-                    <div className="text-xs text-muted-foreground">{stat.label}</div>
-                  </motion.div>
-                ))}
-              </div>
+              <div className="text-lg sm:text-2xl font-bold text-primary">{stat.number}</div>
+              <div className="text-xs text-muted-foreground">{stat.label}</div>
             </motion.div>
-
-            <motion.div
-              initial={{ opacity: 0, x: 50 }}
-              animate={{ opacity: 1, x: 0 }}
-              transition={{ duration: 0.8, delay: 0.4 }}
-              className="relative"
-            >
-              <div className="w-full h-96 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary/10 to-accent/10">
-                <Canvas
-                  camera={{ position: [0, 3, 10], fov: 30 }}
-                  gl={{ preserveDrawingBuffer: true }}
-                  style={{ background: "transparent" }}
-                >
-                  <ambientLight intensity={1.2} />
-                  <directionalLight position={[10, 10, 5]} intensity={2} />
-                  <Suspense fallback={null}>
-                    <BearingModel />
-                    <Environment preset="warehouse" background={false} />
-                  </Suspense>
-                  <OrbitControls enableZoom={false} />
-                </Canvas>
-              </div>
-            </motion.div>
-          </div>
+          ))}
         </div>
-      </motion.section>
+      </motion.div>
+
+      <motion.div
+        initial={{ opacity: 0, x: 50 }}
+        animate={{ opacity: 1, x: 0 }}
+        transition={{ duration: 0.8, delay: 0.4 }}
+        className="relative order-first lg:order-last"
+      >
+        <div className="w-full h-64 sm:h-80 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary/10 to-accent/10">
+          <Canvas
+            camera={{ position: [0, 3, 10], fov: 30 }}
+            gl={{ preserveDrawingBuffer: true }}
+            style={{ background: "transparent" }}
+          >
+            <ambientLight intensity={1.2} />
+            <directionalLight position={[10, 10, 5]} intensity={2} />
+            <Suspense fallback={null}>
+              <BearingModel />
+              <Environment preset="warehouse" background={false} />
+            </Suspense>
+            <OrbitControls enableZoom={false} />
+          </Canvas>
+        </div>
+      </motion.div>
+    </div>
+  </div>
+</motion.section>
+
 
       {/* About Section */}
       <motion.section
