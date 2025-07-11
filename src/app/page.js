@@ -159,7 +159,7 @@ export default function Home() {
                 </h1>
                 
                 <p className="text-xl text-muted-foreground max-w-lg leading-relaxed">
-                  Your trusted partner for premium industrial bearings. We supply genuine bearings from world's leading manufacturers with 25+ years of expertise.
+                  Your trusted partner for premium industrial bearings. We supply genuine bearings from world&apos;s leading manufacturers with 25+ years of expertise.
                 </p>
               </div>
 
@@ -340,7 +340,7 @@ export default function Home() {
                 World-Class <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Brands</span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-4">
-                Authorized distributors of the world's most trusted bearing manufacturers.
+                Authorized distributors of the world&#39;s most trusted bearing manufacturers.
               </p>
             </motion.div>
           </div>
@@ -496,7 +496,7 @@ export default function Home() {
             </div>
             <h3 className="text-3xl md:text-4xl lg:text-5xl font-bold">
               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
-                "Precision in Every Turn – Quality You Can Trust"
+                &quot;Precision in Every Turn – Quality You Can Trust&quot;
               </span>
             </h3>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
@@ -530,7 +530,7 @@ export default function Home() {
                 Ready to <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Connect?</span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-4">
-                Let's discuss your bearing requirements and find the perfect solution for your business.
+                Let&#39;s discuss your bearing requirements and find the perfect solution for your business.
               </p>
             </motion.div>
           </div>
