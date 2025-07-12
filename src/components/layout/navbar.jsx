@@ -19,11 +19,11 @@ import Image from 'next/image';
 
 const navLinks = [
   { name: 'Home', path: '/', badge: null, icon: <Home size={18} /> },
-  { name: 'About', path: '/about', badge: null, icon: <Info size={18} /> },
   { name: 'Products', path: '/products', badge: 'Hot', icon: <Package size={18} /> },
   { name: 'Gallery', path: '/gallery', badge: null, icon: <ImageIcon size={18} /> },
-  { name: 'FAQ', path: '/faq', badge: null, icon: <HelpCircle size={18} /> },
   { name: 'Careers', path: '/careers', badge: 'New', icon: <Briefcase size={18} /> },
+  { name: 'FAQ', path: '/faq', badge: null, icon: <HelpCircle size={18} /> },
+  { name: 'About', path: '/about', badge: null, icon: <Info size={18} /> },
   { name: 'Contact', path: '/contact', badge: null, icon: <Mail size={18} /> },
 ];
 

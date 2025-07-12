@@ -7,17 +7,17 @@ import { Separator } from "@/components/ui/separator";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { 
-  MapPin, 
-  Phone, 
-  Mail, 
-  Clock, 
+import {
+  MapPin,
+  Phone,
+  Mail,
+  Clock,
   ArrowRight,
   Facebook,
   Twitter,
   Linkedin,
   Instagram,
-  Settings
+  Settings,
 } from "lucide-react";
 
 const containerVariants = {
@@ -27,9 +27,9 @@ const containerVariants = {
     y: 0,
     transition: {
       duration: 0.8,
-      staggerChildren: 0.1
-    }
-  }
+      staggerChildren: 0.1,
+    },
+  },
 };
 
 const itemVariants = {
@@ -37,16 +37,47 @@ const itemVariants = {
   visible: {
     opacity: 1,
     y: 0,
-    transition: { duration: 0.5 }
-  }
+    transition: { duration: 0.5 },
+  },
 };
 
 const linkVariants = {
   hover: {
     x: 5,
-    transition: { duration: 0.2 }
-  }
+    transition: { duration: 0.2 },
+  },
 };
+
+const contactList = [
+  {
+    icon: MapPin,
+    label: "Address",
+    value:
+      "opposite of lathi plot 6, aayodhaypuri main road, morbi, Gujarat, India",
+    color: "text-green-600",
+    link: "https://www.google.com/maps/search/?api=1&query=opposite+of+lathi+plot+6,+aayodhaypuri+main+road,+morbi,+Gujarat,+India",
+  },
+  {
+    icon: Phone,
+    label: "Phone",
+    value: "+91 9825283308",
+    color: "text-blue-600",
+    link: "tel:+919825283308",
+  },
+  {
+    icon: Mail,
+    label: "Email",
+    value: "jaykhodiyarbearings@gmail.com",
+    color: "text-purple-600",
+    link: "mailto:jaykhodiyarbearings@gmail.com",
+  },
+  {
+    icon: Clock,
+    label: "Hours",
+    value: "Mon-Sat: 9AM-6PM",
+    color: "text-orange-600",
+  },
+];
 
 export default function Footer() {
   return (
@@ -83,29 +114,32 @@ export default function Footer() {
                         Trusted Since 1998
                       </Badge>
                     </div>
-                    
+
                     <p className="text-muted-foreground text-sm leading-relaxed max-w-md">
-                      Your trusted partner for premium quality ball & roller bearings. 
-                      We deliver excellence with quick service, competitive pricing, and 
-                      reliable solutions for all your industrial needs.
+                      Your trusted partner for premium quality ball & roller
+                      bearings. We deliver excellence with quick service,
+                      competitive pricing, and reliable solutions for all your
+                      industrial needs.
                     </p>
-                    
+
                     <div className="flex gap-3">
-                      {[Facebook, Twitter, Linkedin, Instagram].map((Icon, index) => (
-                        <motion.div
-                          key={index}
-                          whileHover={{ scale: 1.1, y: -2 }}
-                          whileTap={{ scale: 0.95 }}
-                        >
-                          <Button
-                            variant="outline"
-                            size="sm"
-                            className="w-10 h-10 p-0 border-muted-foreground/20 hover:border-primary hover:bg-primary/10"
+                      {[Facebook, Twitter, Linkedin, Instagram].map(
+                        (Icon, index) => (
+                          <motion.div
+                            key={index}
+                            whileHover={{ scale: 1.1, y: -2 }}
+                            whileTap={{ scale: 0.95 }}
                           >
-                            <Icon className="w-4 h-4" />
-                          </Button>
-                        </motion.div>
-                      ))}
+                            <Button
+                              variant="outline"
+                              size="sm"
+                              className="w-10 h-10 p-0 border-muted-foreground/20 hover:border-primary hover:bg-primary/10"
+                            >
+                              <Icon className="w-4 h-4" />
+                            </Button>
+                          </motion.div>
+                        )
+                      )}
                     </div>
                   </CardContent>
                 </Card>
@@ -115,7 +149,9 @@ export default function Footer() {
               <motion.div variants={itemVariants}>
                 <Card className="border-0 shadow-none bg-transparent">
                   <CardContent className="p-0 space-y-4">
-                    <h3 className="text-lg font-semibold text-foreground">Quick Links</h3>
+                    <h3 className="text-lg font-semibold text-foreground">
+                      Quick Links
+                    </h3>
                     <ul className="space-y-3">
                       {[
                         { label: "Home", href: "/" },
@@ -123,10 +159,13 @@ export default function Footer() {
                         { label: "About Us", href: "/about" },
                         { label: "Contact", href: "/contact" },
                         { label: "Services", href: "/services" },
-                        { label: "Catalog", href: "/catalog" }
+                        { label: "Catalog", href: "/catalog" },
                       ].map((link, index) => (
                         <li key={index}>
-                          <motion.div variants={linkVariants} whileHover="hover">
+                          <motion.div
+                            variants={linkVariants}
+                            whileHover="hover"
+                          >
                             <Link
                               href={link.href}
                               className="flex items-center gap-2 text-sm text-muted-foreground hover:text-primary transition-colors group"
@@ -143,44 +182,27 @@ export default function Footer() {
               </motion.div>
 
               {/* Contact Info */}
-              <motion.div variants={itemVariants}>
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.6 }}
+              >
                 <Card className="border-0 shadow-none bg-transparent">
                   <CardContent className="p-0 space-y-4">
-                    <h3 className="text-lg font-semibold text-foreground">Contact Info</h3>
+                    <h3 className="text-lg font-semibold text-foreground">
+                      Contact Info
+                    </h3>
                     <ul className="space-y-4">
-                      {[
-                        { 
-                          icon: MapPin, 
-                          label: "Address", 
-                          value: "morbi, Gujarat, India",
-                          color: "text-green-600"
-                        },
-                        { 
-                          icon: Phone, 
-                          label: "Phone", 
-                          value: "+91 98765 43210",
-                          color: "text-blue-600"
-                        },
-                        { 
-                          icon: Mail, 
-                          label: "Email", 
-                          value: "jaykhodiyarbearings@gmail.com",
-                          color: "text-purple-600"
-                        },
-                        { 
-                          icon: Clock, 
-                          label: "Hours", 
-                          value: "Mon-Sat: 9AM-6PM",
-                          color: "text-orange-600"
-                        }
-                      ].map((contact, index) => (
-                        <li key={index}>
+                      {contactList.map((contact, index) => {
+                        const content = (
                           <motion.div
                             className="flex items-start gap-3 group cursor-pointer"
                             whileHover={{ x: 5 }}
                             transition={{ duration: 0.2 }}
                           >
-                            <div className={`w-5 h-5 mt-0.5 ${contact.color} flex-shrink-0`}>
+                            <div
+                              className={`w-5 h-5 mt-0.5 ${contact.color} flex-shrink-0`}
+                            >
                               <contact.icon className="w-full h-full" />
                             </div>
                             <div className="space-y-1">
@@ -192,8 +214,24 @@ export default function Footer() {
                               </p>
                             </div>
                           </motion.div>
-                        </li>
-                      ))}
+                        );
+
+                        return (
+                          <li key={index}>
+                            {contact.link ? (
+                              <a
+                                href={contact.link}
+                                target="_blank"
+                                rel="noopener noreferrer"
+                              >
+                                {content}
+                              </a>
+                            ) : (
+                              content
+                            )}
+                          </li>
+                        );
+                      })}
                     </ul>
                   </CardContent>
                 </Card>
@@ -214,7 +252,7 @@ export default function Footer() {
                 <Separator orientation="vertical" className="h-4" />
                 <span>All rights reserved.</span>
               </div>
-              
+
               <div className="flex items-center gap-4">
                 <Link
                   href="/privacy"

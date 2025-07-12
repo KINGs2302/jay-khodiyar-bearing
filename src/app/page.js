@@ -3,6 +3,7 @@ import React, { Suspense } from "react";
 import { motion } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
+import Image from "next/image";
 import {
   Card,
   CardContent,
@@ -37,12 +38,42 @@ import BearingModel from "@/components/model/BearingModel";
 import { useState } from "react";
 
 const brands = [
-  { name: "SKF", description: "Swedish precision engineering", color: "from-blue-600 to-blue-700" },
-  { name: "NBC", description: "National Engineering Industries", color: "from-green-600 to-green-700" },
-  { name: "TKP", description: "Timken Power Systems", color: "from-purple-600 to-purple-700" },
-  { name: "NACHI", description: "Japanese precision technology", color: "from-red-600 to-red-700" },
-  { name: "NTN", description: "Global bearing solutions", color: "from-orange-600 to-orange-700" },
-  { name: "FAG", description: "German engineering excellence", color: "from-indigo-600 to-indigo-700" },
+  {
+    name: "SKF",
+    description: "Swedish precision engineering",
+    color: "from-blue-600 to-blue-700",
+    image: "/images/comapnylogos/skf-seeklogo.png",
+  },
+  {
+    name: "NBC",
+    description: "National Engineering Industries",
+    color: "from-yellow-300 to-yellow-400",
+    image: "/images/comapnylogos/NBC_logo.png",
+  },
+  {
+    name: "TKP",
+    description: "Timken Power Systems",
+    color: "from-white-600 to-white-700",
+    image: "/images/comapnylogos/TKP_logo.png",
+  },
+  {
+    name: "NACHI",
+    description: "Japanese precision technology",
+    color: "from-white-600 to-white-700",
+    image: "/images/comapnylogos/Nachi_logo.png",
+  },
+  {
+    name: "NTN",
+    description: "Global bearing solutions",
+    color: "from-gray-600 to-gray-700",
+    image: "/images/comapnylogos/Ntn_logo.png",
+  },
+  {
+    name: "FAG",
+    description: "German engineering excellence",
+    color: "from-white-600 to-white-700",
+    image: "/images/comapnylogos/fag_logo.png",
+  },
 ];
 
 const sections = [
@@ -58,7 +89,8 @@ const features = [
   {
     icon: <Shield className="w-6 h-6" />,
     title: "Quality Assurance",
-    description: "All bearings are genuine and come with manufacturer warranties",
+    description:
+      "All bearings are genuine and come with manufacturer warranties",
     gradient: "from-blue-500 to-blue-600",
   },
   {
@@ -70,7 +102,8 @@ const features = [
   {
     icon: <Users className="w-6 h-6" />,
     title: "Expert Support",
-    description: "25+ years of experience in bearing solutions and technical support",
+    description:
+      "25+ years of experience in bearing solutions and technical support",
     gradient: "from-purple-500 to-purple-600",
   },
   {
@@ -93,10 +126,22 @@ const productCategories = [
 ];
 
 const stats = [
-  { number: "25+", label: "Years Experience", icon: <Award className="w-5 h-5" /> },
-  { number: "1000+", label: "Happy Customers", icon: <Users className="w-5 h-5" /> },
+  {
+    number: "25+",
+    label: "Years Experience",
+    icon: <Award className="w-5 h-5" />,
+  },
+  {
+    number: "1000+",
+    label: "Happy Customers",
+    icon: <Users className="w-5 h-5" />,
+  },
   { number: "6", label: "Premium Brands", icon: <Star className="w-5 h-5" /> },
-  { number: "24/7", label: "Support Available", icon: <Phone className="w-5 h-5" /> },
+  {
+    number: "24/7",
+    label: "Support Available",
+    icon: <Phone className="w-5 h-5" />,
+  },
 ];
 
 export default function Home() {
@@ -112,115 +157,140 @@ export default function Home() {
 
   return (
     <div className="min-h-screen bg-background text-foreground">
-
       {/* Hero Section */}
       <motion.section
-  id="home"
-  initial={{ opacity: 0 }}
-  animate={{ opacity: 1 }}
-  transition={{ duration: 0.8 }}
-  className="relative min-h-screen flex items-center justify-center overflow-hidden"
->
-  {/* Background Elements - Optimized for mobile */}
-  <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-accent/5"></div>
-  <div className="absolute top-10 left-2 sm:top-20 sm:left-10 opacity-5 text-[3rem] sm:text-[6rem] lg:text-[12rem] font-black select-none pointer-events-none">
-    BEARINGS
-  </div>
-  <div className="absolute bottom-10 right-2 sm:bottom-20 sm:right-10 opacity-5 text-[3rem] sm:text-[6rem] lg:text-[12rem] font-black select-none pointer-events-none">
-    QUALITY
-  </div>
-  
-  <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 relative z-10">
-    <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
-      <motion.div
-        initial={{ opacity: 0, x: -50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 0.2 }}
-        className="space-y-6 sm:space-y-8 text-center lg:text-left"
+        id="home"
+        initial={{ opacity: 0 }}
+        animate={{ opacity: 1 }}
+        transition={{ duration: 0.8 }}
+        className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
-        <div className="space-y-4">
-          <motion.div
-            initial={{ opacity: 0, scale: 0.8 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.6, delay: 0.4 }}
-            className="flex items-center justify-center lg:justify-start space-x-2"
-          >
-            <Badge className="bg-gradient-to-r from-primary to-accent text-white text-xs sm:text-sm px-3 py-1">
-              Premium Quality Since 1998
-            </Badge>
-          </motion.div>
-          
-          <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight">
-            <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
-              Jay Khodiyar
-            </span>
-            <br />
-            <span className="text-foreground">Bearings</span>
-          </h1>
-          
-          <p className="text-lg sm:text-xl text-muted-foreground max-w-lg leading-relaxed mx-auto lg:mx-0">
-            Your trusted partner for premium industrial bearings. We supply genuine bearings from world&apos;s leading manufacturers with 25+ years of expertise.
-          </p>
+        {/* Background Elements - Optimized for mobile */}
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-accent/5"></div>
+        <div className="absolute top-10 left-2 sm:top-20 sm:left-10 opacity-5 text-[3rem] sm:text-[6rem] lg:text-[12rem] font-black select-none pointer-events-none">
+          BEARINGS
+        </div>
+        <div className="absolute bottom-10 right-2 sm:bottom-20 sm:right-10 opacity-5 text-[3rem] sm:text-[6rem] lg:text-[12rem] font-black select-none pointer-events-none">
+          QUALITY
         </div>
 
-        <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
-          <Button size="lg" className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white w-full sm:w-auto">
-            <Link href="/products" className="flex items-center justify-center">
-              Explore Products
-              <ArrowRight className="w-4 h-4 ml-2" />
-            </Link>
-          </Button>
-          <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary hover:text-white w-full sm:w-auto">
-            <Link href="/contact">Get Quote</Link>
-          </Button>
-        </div>
-
-        {/* Stats - Mobile optimized grid */}
-        <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto lg:mx-0">
-          {stats.map((stat, index) => (
+        <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 relative z-10">
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 lg:gap-12 items-center">
             <motion.div
-              key={index}
-              initial={{ opacity: 0, y: 20 }}
-              animate={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
-              className="text-center p-2 sm:p-3 rounded-lg bg-muted/50"
+              initial={{ opacity: 0, x: -50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.2 }}
+              className="space-y-6 sm:space-y-8 text-center lg:text-left"
             >
-              <div className="flex justify-center mb-1 text-primary text-sm sm:text-base">
-                {stat.icon}
+              <div className="space-y-4">
+                <motion.div
+                  initial={{ opacity: 0, scale: 0.8 }}
+                  animate={{ opacity: 1, scale: 1 }}
+                  transition={{ duration: 0.6, delay: 0.4 }}
+                  className="flex items-center justify-center lg:justify-start space-x-2"
+                >
+                  <Badge className="bg-gradient-to-r from-primary to-accent text-white text-xs sm:text-sm px-3 py-1">
+                    Premium Quality Since 1998
+                  </Badge>
+                </motion.div>
+
+                <h1 className="text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-black leading-tight">
+                  <span className="bg-gradient-to-r from-primary via-accent to-secondary bg-clip-text text-transparent">
+                    Jay Khodiyar
+                  </span>
+                  <br />
+                  <span className="text-foreground">Bearings</span>
+                </h1>
+
+                <p className="text-lg sm:text-xl text-muted-foreground max-w-lg leading-relaxed mx-auto lg:mx-0">
+                  Your trusted partner for premium industrial bearings. We
+                  supply genuine bearings from world&apos;s leading
+                  manufacturers with 25+ years of expertise.
+                </p>
               </div>
-              <div className="text-lg sm:text-2xl font-bold text-primary">{stat.number}</div>
-              <div className="text-xs text-muted-foreground">{stat.label}</div>
+
+              <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
+                <motion.div
+                  whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.8 }}
+                >
+                  <Button
+                    size="lg"
+                    className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white w-full sm:w-auto"
+                  >
+                    <Link
+                      href="/products"
+                      className="flex items-center justify-center"
+                    >
+                      Explore Products
+                      <ArrowRight className="w-4 h-4 ml-2" />
+                    </Link>
+                  </Button>
+                </motion.div>
+
+                <motion.div
+                  whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.8 }}
+                >
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-primary text-primary hover:bg-primary hover:text-white w-full sm:w-auto"
+                  >
+                    <Link href="/contact">Contact Us</Link>
+                  </Button>
+                </motion.div>
+              </div>
+
+              {/* Stats - Mobile optimized grid */}
+              <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 sm:gap-4 max-w-md sm:max-w-none mx-auto lg:mx-0">
+                {stats.map((stat, index) => (
+                  <motion.div
+                    key={index}
+                    initial={{ opacity: 0, y: 20 }}
+                    animate={{ opacity: 1, y: 0 }}
+                    transition={{ duration: 0.6, delay: 0.6 + index * 0.1 }}
+                    className="text-center p-2 sm:p-3 rounded-lg bg-muted/50"
+                  >
+                    <div className="flex justify-center mb-1 text-primary text-sm sm:text-base">
+                      {stat.icon}
+                    </div>
+                    <div className="text-lg sm:text-2xl font-bold text-primary">
+                      {stat.number}
+                    </div>
+                    <div className="text-xs text-muted-foreground">
+                      {stat.label}
+                    </div>
+                  </motion.div>
+                ))}
+              </div>
             </motion.div>
-          ))}
-        </div>
-      </motion.div>
 
-      <motion.div
-        initial={{ opacity: 0, x: 50 }}
-        animate={{ opacity: 1, x: 0 }}
-        transition={{ duration: 0.8, delay: 0.4 }}
-        className="relative order-first lg:order-last"
-      >
-        <div className="w-full h-64 sm:h-80 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary/10 to-accent/10">
-          <Canvas
-            camera={{ position: [0, 3, 10], fov: 30 }}
-            gl={{ preserveDrawingBuffer: true }}
-            style={{ background: "transparent" }}
-          >
-            <ambientLight intensity={1.2} />
-            <directionalLight position={[10, 10, 5]} intensity={2} />
-            <Suspense fallback={null}>
-              <BearingModel />
-              <Environment preset="warehouse" background={false} />
-            </Suspense>
-            <OrbitControls enableZoom={false} />
-          </Canvas>
+            <motion.div
+              initial={{ opacity: 0, x: 50 }}
+              animate={{ opacity: 1, x: 0 }}
+              transition={{ duration: 0.8, delay: 0.4 }}
+              className="relative order-first lg:order-last"
+            >
+              <div className="w-full h-64 sm:h-80 lg:h-[500px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary/10 to-accent/10">
+                <Canvas
+                  camera={{ position: [0, 3, 10], fov: 30 }}
+                  gl={{ preserveDrawingBuffer: true }}
+                  style={{ background: "transparent" }}
+                >
+                  <ambientLight intensity={1.2} />
+                  <directionalLight position={[10, 10, 5]} intensity={2} />
+                  <Suspense fallback={null}>
+                    <BearingModel />
+                    <Environment preset="warehouse" background={false} />
+                  </Suspense>
+                  <OrbitControls enableZoom={false} />
+                </Canvas>
+              </div>
+            </motion.div>
+          </div>
         </div>
-      </motion.div>
-    </div>
-  </div>
-</motion.section>
-
+      </motion.section>
 
       {/* About Section */}
       <motion.section
@@ -237,12 +307,18 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <Badge variant="secondary" className="mb-4">About Our Company</Badge>
+              <Badge variant="secondary" className="mb-4">
+                About Our Company
+              </Badge>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-                Excellence in <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Bearing Solutions</span>
+                Excellence in{" "}
+                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  Bearing Solutions
+                </span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-4">
-                Three decades of unwavering commitment to quality and innovation in industrial bearing distribution.
+                Three decades of unwavering commitment to quality and innovation
+                in industrial bearing distribution.
               </p>
             </motion.div>
           </div>
@@ -258,22 +334,31 @@ export default function Home() {
                 <h3 className="text-2xl font-bold text-primary">Our Journey</h3>
                 <div className="space-y-4">
                   <p className="text-muted-foreground leading-relaxed">
-                    Founded in 1998, Jay Khodiyar Bearings has evolved from a small local distributor to a leading bearing supplier across Gujarat and beyond. Our journey is marked by consistent growth, technological advancement, and unwavering commitment to customer satisfaction.
+                    Founded in 1998, Jay Khodiyar Bearings has evolved from a
+                    small local distributor to a leading bearing supplier across
+                    Gujarat and beyond. Our journey is marked by consistent
+                    growth, technological advancement, and unwavering commitment
+                    to customer satisfaction.
                   </p>
                   <p className="text-muted-foreground leading-relaxed">
-                    We serve diverse industries including automotive, manufacturing, mining, construction, and aerospace, providing tailored bearing solutions that meet the highest standards of quality and performance.
+                    We serve diverse industries including automotive,
+                    manufacturing, mining, construction, and aerospace,
+                    providing tailored bearing solutions that meet the highest
+                    standards of quality and performance.
                   </p>
                 </div>
               </div>
 
               <div className="space-y-4">
-                <h4 className="text-xl font-semibold text-primary">Our Commitment</h4>
+                <h4 className="text-xl font-semibold text-primary">
+                  Our Commitment
+                </h4>
                 <div className="space-y-3">
                   {[
                     "Genuine products from authorized manufacturers",
                     "Expert technical support and consultation",
                     "Competitive pricing and flexible payment terms",
-                    "On-time delivery across India"
+                    "On-time delivery across India",
                   ].map((item, index) => (
                     <div key={index} className="flex items-center space-x-3">
                       <CheckCircle className="w-5 h-5 text-green-500" />
@@ -295,24 +380,32 @@ export default function Home() {
                   <div className="bg-gradient-to-br from-primary to-accent p-6 rounded-xl text-white">
                     <Factory className="w-8 h-8 mb-3" />
                     <h4 className="font-semibold mb-2">Industrial Focus</h4>
-                    <p className="text-sm opacity-90">Specialized solutions for heavy industries</p>
+                    <p className="text-sm opacity-90">
+                      Specialized solutions for heavy industries
+                    </p>
                   </div>
                   <div className="bg-gradient-to-br from-green-500 to-green-600 p-6 rounded-xl text-white">
                     <Globe className="w-8 h-8 mb-3" />
                     <h4 className="font-semibold mb-2">Global Reach</h4>
-                    <p className="text-sm opacity-90">International brand partnerships</p>
+                    <p className="text-sm opacity-90">
+                      International brand partnerships
+                    </p>
                   </div>
                 </div>
                 <div className="space-y-6 mt-8">
                   <div className="bg-gradient-to-br from-purple-500 to-purple-600 p-6 rounded-xl text-white">
                     <Zap className="w-8 h-8 mb-3" />
                     <h4 className="font-semibold mb-2">Innovation</h4>
-                    <p className="text-sm opacity-90">Latest bearing technologies</p>
+                    <p className="text-sm opacity-90">
+                      Latest bearing technologies
+                    </p>
                   </div>
                   <div className="bg-gradient-to-br from-orange-500 to-orange-600 p-6 rounded-xl text-white">
                     <Shield className="w-8 h-8 mb-3" />
                     <h4 className="font-semibold mb-2">Quality First</h4>
-                    <p className="text-sm opacity-90">Rigorous quality control</p>
+                    <p className="text-sm opacity-90">
+                      Rigorous quality control
+                    </p>
                   </div>
                 </div>
               </div>
@@ -336,12 +429,18 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <Badge variant="secondary" className="mb-4">Premium Partnerships</Badge>
+              <Badge variant="secondary" className="mb-4">
+                Premium Partnerships
+              </Badge>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-                World-Class <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Brands</span>
+                World-Class{" "}
+                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  Brands
+                </span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-4">
-                Authorized distributors of the world&#39;s most trusted bearing manufacturers.
+                Authorized distributors of the world&#39;s most trusted bearing
+                manufacturers.
               </p>
             </motion.div>
           </div>
@@ -358,11 +457,23 @@ export default function Home() {
               >
                 <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
                   <CardHeader className="text-center p-8">
-                    <div className={`w-20 h-20 bg-gradient-to-br ${brand.color} rounded-xl flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4 shadow-lg`}>
-                      {brand.name.slice(0, 2)}
+                    <div
+                      className={`w-20 h-20 bg-gradient-to-br ${brand.color} rounded-xl flex items-center justify-center text-white font-bold text-2xl mx-auto mb-4 shadow-lg`}
+                    >
+                      <Image
+                        src={brand.image}
+                        alt={brand.name}
+                        width={70}
+                        height={70}
+                        className="object-contain"
+                      />
                     </div>
-                    <CardTitle className="text-2xl font-bold">{brand.name}</CardTitle>
-                    <CardDescription className="text-base mt-2">{brand.description}</CardDescription>
+                    <CardTitle className="text-2xl font-bold">
+                      {brand.name}
+                    </CardTitle>
+                    <CardDescription className="text-base mt-2">
+                      {brand.description}
+                    </CardDescription>
                   </CardHeader>
                 </Card>
               </motion.div>
@@ -386,12 +497,18 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <Badge variant="secondary" className="mb-4">Product Range</Badge>
+              <Badge variant="secondary" className="mb-4">
+                Product Range
+              </Badge>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-                Comprehensive <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Solutions</span>
+                Comprehensive{" "}
+                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  Solutions
+                </span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-4">
-                From precision ball bearings to heavy-duty industrial solutions, we have everything you need.
+                From precision ball bearings to heavy-duty industrial solutions,
+                we have everything you need.
               </p>
             </motion.div>
           </div>
@@ -411,7 +528,9 @@ export default function Home() {
                     <div className="w-12 h-12 bg-gradient-to-br from-primary to-accent rounded-lg flex items-center justify-center text-white mx-auto mb-3">
                       {category.icon}
                     </div>
-                    <CardTitle className="text-lg font-semibold">{category.name}</CardTitle>
+                    <CardTitle className="text-lg font-semibold">
+                      {category.name}
+                    </CardTitle>
                   </CardHeader>
                 </Card>
               </motion.div>
@@ -435,12 +554,18 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <Badge variant="secondary" className="mb-4">Why Choose Us</Badge>
+              <Badge variant="secondary" className="mb-4">
+                Why Choose Us
+              </Badge>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-                Your Success is <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Our Priority</span>
+                Your Success is{" "}
+                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  Our Priority
+                </span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-4">
-                Experience the difference of working with industry leaders who understand your needs.
+                Experience the difference of working with industry leaders who
+                understand your needs.
               </p>
             </motion.div>
           </div>
@@ -458,12 +583,18 @@ export default function Home() {
                 <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
                   <CardHeader className="p-8">
                     <div className="flex items-start gap-6">
-                      <div className={`w-14 h-14 bg-gradient-to-br ${feature.gradient} rounded-xl flex items-center justify-center text-white shadow-lg`}>
+                      <div
+                        className={`w-14 h-14 bg-gradient-to-br ${feature.gradient} rounded-xl flex items-center justify-center text-white shadow-lg`}
+                      >
                         {feature.icon}
                       </div>
                       <div className="flex-1">
-                        <CardTitle className="text-xl font-bold mb-3">{feature.title}</CardTitle>
-                        <CardDescription className="text-base leading-relaxed">{feature.description}</CardDescription>
+                        <CardTitle className="text-xl font-bold mb-3">
+                          {feature.title}
+                        </CardTitle>
+                        <CardDescription className="text-base leading-relaxed">
+                          {feature.description}
+                        </CardDescription>
                       </div>
                     </div>
                   </CardHeader>
@@ -491,7 +622,10 @@ export default function Home() {
             <div className="flex justify-center mb-6">
               <div className="flex gap-1">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-8 h-8 text-yellow-500 fill-current" />
+                  <Star
+                    key={i}
+                    className="w-8 h-8 text-yellow-500 fill-current"
+                  />
                 ))}
               </div>
             </div>
@@ -501,12 +635,21 @@ export default function Home() {
               </span>
             </h3>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Experience the difference of genuine bearings backed by decades of expertise and unwavering commitment to excellence.
+              Experience the difference of genuine bearings backed by decades of
+              expertise and unwavering commitment to excellence.
             </p>
-            <Button size="lg" className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white px-8 py-4 text-lg">
-              Start Your Journey With Us
+            <motion.div
+             whileHover={{ scale: 1.2 }}
+            whileTap={{ scale: 0.8 }}
+            >
+            <Button
+              size="lg"
+              className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white px-8 py-4 text-lg"
+            >
+              <Link href="/gallery" >Start Your Journey With Us </Link>
               <ChevronRight className="w-5 h-5 ml-2" />
             </Button>
+            </motion.div>
           </motion.div>
         </div>
       </motion.section>
@@ -526,21 +669,42 @@ export default function Home() {
               whileInView={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.6 }}
             >
-              <Badge variant="secondary" className="mb-4">Get In Touch</Badge>
+              <Badge variant="secondary" className="mb-4">
+                Get In Touch
+              </Badge>
               <h2 className="text-3xl md:text-4xl lg:text-5xl font-bold">
-                Ready to <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">Connect?</span>
+                Ready to{" "}
+                <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
+                  Connect?
+                </span>
               </h2>
               <p className="text-lg text-muted-foreground max-w-3xl mx-auto mt-4">
-                Let&#39;s discuss your bearing requirements and find the perfect solution for your business.
+                Let&#39;s discuss your bearing requirements and find the perfect
+                solution for your business.
               </p>
             </motion.div>
           </div>
 
           <div className="grid md:grid-cols-3 gap-8 mb-12">
             {[
-              { icon: <Phone className="w-6 h-6" />, title: "Call Us", info: "+91 98765 43210", gradient: "from-green-500 to-green-600" },
-              { icon: <Mail className="w-6 h-6" />, title: "Email Us", info: "info@jaykhodiyar.com", gradient: "from-blue-500 to-blue-600" },
-              { icon: <MapPin className="w-6 h-6" />, title: "Visit Us", info: "Rajkot, Gujarat, India", gradient: "from-purple-500 to-purple-600" }
+              {
+                icon: <Phone className="w-6 h-6" />,
+                title: "Call Us",
+                info: "+91 9825283308",
+                gradient: "from-green-500 to-green-600",
+              },
+              {
+                icon: <Mail className="w-6 h-6" />,
+                title: "Email Us",
+                info: "jaykhodiyarbearings@gmail.com",
+                gradient: "from-blue-500 to-blue-600",
+              },
+              {
+                icon: <MapPin className="w-6 h-6" />,
+                title: "Visit Us",
+                info: "opposite of lathi plot 6, aayodhaypuri main road, morbi, Gujarat, India",
+                gradient: "from-purple-500 to-purple-600",
+              },
             ].map((contact, index) => (
               <motion.div
                 key={index}
@@ -551,27 +715,24 @@ export default function Home() {
               >
                 <Card className="h-full hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
                   <CardHeader className="text-center p-8">
-                    <div className={`w-16 h-16 bg-gradient-to-br ${contact.gradient} rounded-xl flex items-center justify-center text-white mx-auto mb-4 shadow-lg`}>
+                    <div
+                      className={`w-16 h-16 bg-gradient-to-br ${contact.gradient} rounded-xl flex items-center justify-center text-white mx-auto mb-4 shadow-lg`}
+                    >
                       {contact.icon}
                     </div>
-                    <CardTitle className="text-xl font-bold mb-2">{contact.title}</CardTitle>
-                    <CardDescription className="text-base font-medium">{contact.info}</CardDescription>
+                    <CardTitle className="text-xl font-bold mb-2">
+                      {contact.title}
+                    </CardTitle>
+                    <CardDescription className="text-base font-medium">
+                      {contact.info}
+                    </CardDescription>
                   </CardHeader>
                 </Card>
               </motion.div>
             ))}
           </div>
-
-          <div className="text-center">
-            <Button size="lg" className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white px-12 py-4 text-lg">
-              Request Quote Now
-              <ArrowRight className="w-5 h-5 ml-2" />
-            </Button>
-          </div>
         </div>
       </motion.section>
-
-      
     </div>
   );
 }
