@@ -166,12 +166,13 @@ export default function Home() {
         className="relative min-h-screen flex items-center justify-center overflow-hidden"
       >
         {/* Background Elements - Optimized for mobile */}
-        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-accent/5"></div>
-        <div className="absolute top-10 left-2 sm:top-20 sm:left-10 opacity-5 text-[3rem] sm:text-[6rem] lg:text-[12rem] font-black select-none pointer-events-none">
-          BEARINGS
-        </div>
-        <div className="absolute bottom-10 right-2 sm:bottom-20 sm:right-10 opacity-5 text-[3rem] sm:text-[6rem] lg:text-[12rem] font-black select-none pointer-events-none">
-          QUALITY
+        <div className="absolute inset-0 bg-gradient-to-br from-background via-background to-accent/5">
+          <div className="absolute top-10 left-2 sm:top-20 sm:left-10 opacity-5 text-[3rem] sm:text-[6rem] lg:text-[12rem] font-black select-none pointer-events-none">
+            BEARINGS
+          </div>
+          <div className="absolute bottom-10 right-2 sm:bottom-20 sm:right-10 opacity-5 text-[3rem] sm:text-[6rem] lg:text-[12rem] font-black select-none pointer-events-none">
+            QUALITY
+          </div>
         </div>
 
         <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-20 relative z-10">
@@ -212,7 +213,7 @@ export default function Home() {
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
                 <motion.div
                   whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.8 }}
+                  whileTap={{ scale: 0.8 }}
                 >
                   <Button
                     size="lg"
@@ -230,7 +231,7 @@ export default function Home() {
 
                 <motion.div
                   whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.8 }}
+                  whileTap={{ scale: 0.8 }}
                 >
                   <Button
                     variant="outline"
@@ -638,17 +639,14 @@ export default function Home() {
               Experience the difference of genuine bearings backed by decades of
               expertise and unwavering commitment to excellence.
             </p>
-            <motion.div
-             whileHover={{ scale: 1.2 }}
-            whileTap={{ scale: 0.8 }}
-            >
-            <Button
-              size="lg"
-              className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white px-8 py-4 text-lg"
-            >
-              <Link href="/gallery" >Start Your Journey With Us </Link>
-              <ChevronRight className="w-5 h-5 ml-2" />
-            </Button>
+            <motion.div whileHover={{ scale: 1.2 }} whileTap={{ scale: 0.8 }}>
+              <Button
+                size="lg"
+                className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white px-8 py-4 text-lg"
+              >
+                <Link href="/gallery">Start Your Journey With Us </Link>
+                <ChevronRight className="w-5 h-5 ml-2" />
+              </Button>
             </motion.div>
           </motion.div>
         </div>
