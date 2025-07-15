@@ -212,34 +212,36 @@ export default function Home() {
 
               <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center lg:justify-start">
                 <motion.div
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.8 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <Button
-                    size="lg"
-                    className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white w-full sm:w-auto"
+                  <Link
+                    href="/products"
+                    className="flex items-center justify-center"
                   >
-                    <Link
-                      href="/products"
-                      className="flex items-center justify-center"
+                    <Button
+                      size="lg"
+                      className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white w-full sm:w-auto"
                     >
                       Explore Products
                       <ArrowRight className="w-4 h-4 ml-2" />
-                    </Link>
-                  </Button>
+                    </Button>
+                  </Link>
                 </motion.div>
 
                 <motion.div
-                  whileHover={{ scale: 1.2 }}
-                  whileTap={{ scale: 0.8 }}
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
                 >
-                  <Button
-                    variant="outline"
-                    size="lg"
-                    className="border-primary text-primary hover:bg-primary hover:text-white w-full sm:w-auto"
-                  >
-                    <Link href="/contact">Contact Us</Link>
-                  </Button>
+                  <Link href="/contact">
+                    <Button
+                      variant="outline"
+                      size="lg"
+                      className="border-primary text-primary hover:bg-primary hover:text-white w-full sm:w-auto"
+                    >
+                      Contact Us
+                    </Button>
+                  </Link>
                 </motion.div>
               </div>
 

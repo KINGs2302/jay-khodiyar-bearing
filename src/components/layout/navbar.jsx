@@ -6,15 +6,25 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Badge } from '@/components/ui/badge';
 import { motion, AnimatePresence } from 'framer-motion';
-import { Sun, Moon, Search, Menu, X, ChevronDown, Sparkles,   Home,
+import { 
+  Sun, 
+  Moon, 
+  Search, 
+  Menu, 
+  X, 
+  ChevronDown, 
+  Sparkles,   
+  Home,
   Info,
   Package,
   Image as ImageIcon,
   MessageSquare,
   HelpCircle,
   Briefcase,
-  Mail, } from 'lucide-react';
+  Mail, 
+} from 'lucide-react';
 import { useState, useEffect } from 'react';
+import { usePathname } from 'next/navigation';
 import Image from 'next/image';
 
 const navLinks = [
@@ -27,7 +37,6 @@ const navLinks = [
   { name: 'Contact', path: '/contact', badge: null, icon: <Mail size={18} /> },
 ];
 
-
 export default function Navbar() {
   const { theme, setTheme } = useTheme();
   const [mounted, setMounted] = useState(false);
@@ -35,6 +44,7 @@ export default function Navbar() {
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [searchFocused, setSearchFocused] = useState(false);
   const [scrolled, setScrolled] = useState(false);
+  const pathname = usePathname();
 
   useEffect(() => {
     setMounted(true);
@@ -46,6 +56,14 @@ export default function Navbar() {
     window.addEventListener('scroll', handleScroll);
     return () => window.removeEventListener('scroll', handleScroll);
   }, []);
+
+  // Check if current path matches link path
+  const isActive = (path) => {
+    if (path === '/') {
+      return pathname === '/';
+    }
+    return pathname.startsWith(path);
+  };
 
   const containerVariants = {
     hidden: { opacity: 0, y: -50 },
@@ -93,7 +111,6 @@ export default function Navbar() {
   const navLinkVariants = {
     hover: {
       y: -2,
-      color: "var(--primary)",
       transition: { duration: 0.2, ease: "easeOut" }
     }
   };
@@ -132,11 +149,11 @@ export default function Navbar() {
         animate="visible"
         className={`sticky top-0 z-50 transition-all duration-300 ${
           scrolled 
-            ? 'bg-background/80 backdrop-blur-lg border-b shadow-lg' 
-            : 'bg-background border-b'
+            ? 'bg-background/80 backdrop-blur-lg border-b border-border shadow-lg' 
+            : 'bg-background border-b border-border'
         }`}
       >
-        <div className="max-w-screen mx-auto px-4 sm:px-6 lg:px-8 ">
+        <div className="max-w-screen mx-auto px-4 sm:px-6 lg:px-8">
           <div className="flex items-center justify-between h-16">
             {/* Logo */}
             <motion.div variants={itemVariants}>
@@ -157,7 +174,7 @@ export default function Navbar() {
                 </motion.div>
                 <div className="flex flex-col">
                   <motion.span 
-                    className="font-bold text-xl bg-gradient-to-r from-primary to-accent bg-clip-text text-primary w-full"
+                    className="font-bold text-xl bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent"
                     whileHover={{ scale: 1.02 }}
                   >
                     Jay Khodiyar Bearing
@@ -189,9 +206,13 @@ export default function Navbar() {
                 >
                   <Link
                     href={link.path}
-                    className="px-4 py-2 rounded-lg text-sm font-medium transition-colors hover:bg-primary/10 relative flex items-center gap-2"
+                    className={`px-4 py-2 rounded-lg text-sm font-medium transition-all duration-200 relative flex items-center gap-2 ${
+                      isActive(link.path)
+                        ? 'text-primary bg-primary/10 shadow-sm'
+                        : 'text-foreground hover:text-primary hover:bg-primary/10'
+                    }`}
                   >
-                  {link.icon}
+                    {link.icon}
                     {link.name}
                     {link.badge && (
                       <Badge 
@@ -202,9 +223,11 @@ export default function Navbar() {
                       </Badge>
                     )}
                   </Link>
+                  {/* Active indicator */}
                   <motion.div
                     className="absolute bottom-0 left-0 right-0 h-0.5 bg-gradient-to-r from-primary to-accent"
                     initial={{ scaleX: 0 }}
+                    animate={{ scaleX: isActive(link.path) ? 1 : 0 }}
                     whileHover={{ scaleX: 1 }}
                     transition={{ duration: 0.2 }}
                   />
@@ -226,7 +249,7 @@ export default function Navbar() {
                 <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                 <Input
                   placeholder="Search products..."
-                  className="pl-10 pr-4 py-2 w-64 text-sm rounded-xl border-2 border-transparent focus:border-primary/30 transition-all duration-200"
+                  className="pl-10 pr-4 py-2 w-64 text-sm rounded-xl border-2 border-border focus:border-primary/30 transition-all duration-200 bg-background text-foreground"
                   value={search}
                   onChange={(e) => setSearch(e.target.value)}
                   onFocus={() => setSearchFocused(true)}
@@ -238,7 +261,7 @@ export default function Navbar() {
                       initial={{ opacity: 0, scale: 0.95 }}
                       animate={{ opacity: 1, scale: 1 }}
                       exit={{ opacity: 0, scale: 0.95 }}
-                      className="absolute top-full left-0 right-0 mt-2 p-3 bg-background border rounded-xl shadow-lg"
+                      className="absolute top-full left-0 right-0 mt-2 p-3 bg-background border border-border rounded-xl shadow-lg"
                     >
                       <p className="text-sm text-muted-foreground">
                         Try searching for "bearings", "industrial", or "automotive"
@@ -258,7 +281,7 @@ export default function Navbar() {
                     variant="ghost"
                     size="icon"
                     onClick={() => setTheme(theme === 'dark' ? 'light' : 'dark')}
-                    className="relative overflow-hidden rounded-xl border-2 border-transparent hover:border-primary/30 transition-colors"
+                    className="relative overflow-hidden rounded-xl border-2 border-transparent hover:border-primary/30 transition-all duration-200 bg-background text-foreground hover:bg-primary/10"
                   >
                     <motion.div
                       initial={false}
@@ -288,7 +311,7 @@ export default function Navbar() {
                   variant="ghost"
                   size="icon"
                   onClick={() => setMobileMenuOpen(!mobileMenuOpen)}
-                  className="relative overflow-hidden rounded-xl border-2 border-transparent hover:border-primary/30"
+                  className="relative overflow-hidden rounded-xl border-2 border-transparent hover:border-primary/30 transition-all duration-200 bg-background text-foreground hover:bg-primary/10"
                 >
                   <motion.div
                     animate={{ rotate: mobileMenuOpen ? 180 : 0 }}
@@ -310,7 +333,7 @@ export default function Navbar() {
               initial="closed"
               animate="open"
               exit="closed"
-              className="lg:hidden bg-background/95 backdrop-blur-lg border-t overflow-hidden"
+              className="lg:hidden bg-background/95 backdrop-blur-lg border-t border-border overflow-hidden"
             >
               <div className="px-4 py-6 space-y-4">
                 {/* Mobile Search */}
@@ -319,7 +342,7 @@ export default function Navbar() {
                     <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 h-4 w-4 text-muted-foreground" />
                     <Input
                       placeholder="Search products..."
-                      className="pl-10 pr-4 py-3 w-full text-sm rounded-xl border-2 border-transparent focus:border-primary/30"
+                      className="pl-10 pr-4 py-3 w-full text-sm rounded-xl border-2 border-border focus:border-primary/30 transition-all duration-200 bg-background text-foreground"
                       value={search}
                       onChange={(e) => setSearch(e.target.value)}
                     />
@@ -336,11 +359,15 @@ export default function Navbar() {
                   >
                     <Link
                       href={link.path}
-                      className="flex items-center justify-between p-3 rounded-xl hover:bg-primary/10 transition-colors group"
+                      className={`flex items-center justify-between p-3 rounded-xl transition-all duration-200 group ${
+                        isActive(link.path)
+                          ? 'bg-primary/10 text-primary shadow-sm'
+                          : 'text-foreground hover:bg-primary/10 hover:text-primary'
+                      }`}
                       onClick={() => setMobileMenuOpen(false)}
                     >
                       <div className="flex items-center gap-3">
-                      {link.icon}
+                        {link.icon}
                         <span className="font-medium">{link.name}</span>
                         {link.badge && (
                           <Badge 

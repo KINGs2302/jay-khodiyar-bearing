@@ -3,13 +3,25 @@ import React, { Suspense, useRef, useState } from "react";
 import { motion, useInView } from "framer-motion";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
+import {
+  Card,
+  CardContent,
+  CardDescription,
+  CardHeader,
+  CardTitle,
+} from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Separator } from "@/components/ui/separator";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { OrbitControls, Environment, Float, Text3D, Center } from "@react-three/drei";
+import {
+  OrbitControls,
+  Environment,
+  Float,
+  Text3D,
+  Center,
+} from "@react-three/drei";
 import * as THREE from "three";
 import {
   MapPin,
@@ -18,10 +30,6 @@ import {
   Clock,
   Send,
   MessageCircle,
-  Building,
-  User,
-  Globe,
-  Award,
   CheckCircle,
   Star,
   ArrowRight,
@@ -30,142 +38,76 @@ import {
   Shield,
   HeartHandshake,
   Zap,
-  Target
+  Target,
 } from "lucide-react";
-
-// Animated 3D Communication Network
-function CommunicationNetwork() {
-  const groupRef = useRef();
-  const nodesRef = useRef([]);
-  
-  useFrame((state) => {
-    if (groupRef.current) {
-      groupRef.current.rotation.y += 0.005;
-    }
-    
-    nodesRef.current.forEach((node, index) => {
-      if (node) {
-        node.rotation.x += 0.01 * (index + 1);
-        node.rotation.z += 0.008 * (index + 1);
-      }
-    });
-  });
-
-  const nodes = [
-    { position: [0, 0, 0], scale: 1.5, color: "#3b82f6" },
-    { position: [3, 2, 1], scale: 0.8, color: "#8b5cf6" },
-    { position: [-3, -1, 2], scale: 0.6, color: "#10b981" },
-    { position: [2, -2, -1], scale: 0.7, color: "#f59e0b" },
-    { position: [-2, 2, -2], scale: 0.5, color: "#ef4444" },
-  ];
-
-  return (
-    <group ref={groupRef}>
-      {nodes.map((node, index) => (
-        <Float key={index} speed={2 + index * 0.5} rotationIntensity={0.3} floatIntensity={0.5}>
-          <mesh
-            ref={(el) => (nodesRef.current[index] = el)}
-            position={node.position}
-            scale={node.scale}
-          >
-            <octahedronGeometry args={[1, 0]} />
-            <meshStandardMaterial
-              color={node.color}
-              metalness={0.7}
-              roughness={0.3}
-              emissive={node.color}
-              emissiveIntensity={0.1}
-            />
-          </mesh>
-        </Float>
-      ))}
-      
-      {/* Connection Lines */}
-      <group>
-        <line>
-          <bufferGeometry>
-            <bufferAttribute
-              attach="attributes-position"
-              count={2}
-              array={new Float32Array([0, 0, 0, 3, 2, 1])}
-              itemSize={3}
-            />
-          </bufferGeometry>
-          <lineBasicMaterial color="#3b82f6" opacity={0.3} transparent />
-        </line>
-        <line>
-          <bufferGeometry>
-            <bufferAttribute
-              attach="attributes-position"
-              count={2}
-              array={new Float32Array([0, 0, 0, -3, -1, 2])}
-              itemSize={3}
-            />
-          </bufferGeometry>
-          <lineBasicMaterial color="#10b981" opacity={0.3} transparent />
-        </line>
-      </group>
-    </group>
-  );
-}
-
-// 3D Contact Scene
-function ContactScene() {
-  return (
-    <Canvas camera={{ position: [0, 0, 8], fov: 60 }}>
-      <ambientLight intensity={0.4} />
-      <directionalLight position={[10, 10, 5]} intensity={1} />
-      <pointLight position={[-10, -10, -5]} intensity={0.3} color="#3b82f6" />
-      <pointLight position={[10, -10, 5]} intensity={0.3} color="#10b981" />
-      
-      <Suspense fallback={null}>
-        <CommunicationNetwork />
-        <Environment preset="warehouse" background={false} />
-      </Suspense>
-      
-      <OrbitControls enableZoom={false} enablePan={false} autoRotate autoRotateSpeed={0.5} />
-    </Canvas>
-  );
-}
+import Image from "next/image";
 
 // Contact Form Component
 function ContactForm() {
   const [formData, setFormData] = useState({
-    name: '',
-    email: '',
-    phone: '',
-    company: '',
-    subject: '',
-    message: ''
+    name: "",
+    email: "",
+    phone: "",
+    company: "",
+    subject: "",
+    message: "",
   });
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [submitted, setSubmitted] = useState(false);
 
   const handleInputChange = (e) => {
     const { name, value } = e.target;
-    setFormData(prev => ({
+    setFormData((prev) => ({
       ...prev,
-      [name]: value
+      [name]: value,
     }));
   };
 
   const handleSubmit = async () => {
-    setIsSubmitting(true);
-    
-    // Simulate form submission
-    setTimeout(() => {
-      setIsSubmitting(false);
+  setIsSubmitting(true);
+
+  try {
+    const response = await fetch("https://api.web3forms.com/submit", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+        Accept: "application/json",
+      },
+      body: JSON.stringify({
+        access_key: "2c924bab-30b8-49be-bbd4-898f669adf74",
+        from_name: "Jay Khodiyar Bearings Website",
+        name: formData.name,
+        email: formData.email,
+        phone: formData.phone,
+        company: formData.company,
+        subject: formData.subject,
+        message: formData.message,
+      }),
+    });
+
+    const result = await response.json();
+
+    if (result.success) {
       setSubmitted(true);
       setFormData({
-        name: '',
-        email: '',
-        phone: '',
-        company: '',
-        subject: '',
-        message: ''
+        name: "",
+        email: "",
+        phone: "",
+        company: "",
+        subject: "",
+        message: "",
       });
-    }, 2000);
-  };
+    } else {
+      toast.error("Something went wrong. Please try again later.");
+    }
+  } catch (error) {
+    toast.error("Failed to send message. Please try again later.");
+    console.error("Error submitting form:", error);
+  } finally {
+    setIsSubmitting(false);
+  }
+};
+
 
   if (submitted) {
     return (
@@ -177,7 +119,9 @@ function ContactForm() {
         <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-full flex items-center justify-center mx-auto mb-6">
           <CheckCircle className="w-8 h-8 text-white" />
         </div>
-        <h3 className="text-2xl font-bold text-green-600 mb-4">Message Sent Successfully!</h3>
+        <h3 className="text-2xl font-bold text-green-600 mb-4">
+          Message Sent Successfully!
+        </h3>
         <p className="text-muted-foreground mb-6">
           Thank you for contacting us. We'll get back to you within 24 hours.
         </p>
@@ -273,10 +217,7 @@ function ContactForm() {
         />
       </div>
 
-      <motion.div
-        whileHover={{ scale: 1.02 }}
-        whileTap={{ scale: 0.98 }}
-      >
+      <motion.div whileHover={{ scale: 1.02 }} whileTap={{ scale: 0.98 }}>
         <Button
           onClick={handleSubmit}
           disabled={isSubmitting}
@@ -310,30 +251,26 @@ function Contact() {
       title: "Visit Our Office",
       details: [
         "Jay Khodiyar Bearings",
-        "123 Industrial Estate, Rajkot",
-        "Gujarat 360001, India"
+        "opposite of lathi plot 6, aayodhaypuri main road, morbi",
+        "Gujarat 360001, India",
       ],
-      gradient: "from-blue-500 to-blue-600"
+      gradient: "from-blue-500 to-blue-600",
     },
     {
       icon: <Phone className="w-6 h-6" />,
       title: "Call Us",
       details: [
         "+91 9825283308",
-        "+91 281 2345678",
-        "Mon-Sat: 9:00 AM - 7:00 PM"
+        "+91 9429245056",
+        "Mon-Sat: 9:00 AM - 8:00 PM",
       ],
-      gradient: "from-green-500 to-green-600"
+      gradient: "from-green-500 to-green-600",
     },
     {
       icon: <Mail className="w-6 h-6" />,
       title: "Email Us",
-      details: [
-        "info@jaykhodiyarbearings.com",
-        "sales@jaykhodiyarbearings.com",
-        "support@jaykhodiyarbearings.com"
-      ],
-      gradient: "from-purple-500 to-purple-600"
+      details: ["jaykhodiyar@gmail.com"],
+      gradient: "from-purple-500 to-purple-600",
     },
     {
       icon: <Clock className="w-6 h-6" />,
@@ -341,33 +278,34 @@ function Contact() {
       details: [
         "Monday - Friday: 9:00 AM - 7:00 PM",
         "Saturday: 9:00 AM - 5:00 PM",
-        "Sunday: Closed"
+        "Sunday: Closed",
       ],
-      gradient: "from-orange-500 to-orange-600"
-    }
+      gradient: "from-orange-500 to-orange-600",
+    },
   ];
 
   const reasons = [
     {
       icon: <Shield className="w-8 h-8" />,
       title: "Quality Assurance",
-      description: "Every bearing comes with our guarantee of quality and performance."
+      description:
+        "Every bearing comes with our guarantee of quality and performance.",
     },
     {
       icon: <Truck className="w-8 h-8" />,
       title: "Fast Delivery",
-      description: "Quick delivery across India with real-time tracking."
+      description: "Quick delivery across India with real-time tracking.",
     },
     {
       icon: <HeartHandshake className="w-8 h-8" />,
       title: "Expert Support",
-      description: "Technical expertise and customer support when you need it."
+      description: "Technical expertise and customer support when you need it.",
     },
     {
       icon: <Target className="w-8 h-8" />,
       title: "Competitive Pricing",
-      description: "Best prices in the market without compromising quality."
-    }
+      description: "Best prices in the market without compromising quality.",
+    },
   ];
 
   return (
@@ -387,7 +325,7 @@ function Contact() {
             WITH US
           </div>
         </div>
-        
+
         <div className="container mx-auto px-4 relative z-10">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <motion.div
@@ -408,24 +346,41 @@ function Contact() {
                   </span>
                 </h1>
                 <p className="text-xl text-muted-foreground leading-relaxed max-w-2xl">
-                  Ready to find the perfect bearing solution for your business? Our team of 
-                  experts is here to help you every step of the way.
+                  Ready to find the perfect bearing solution for your business?
+                  Our team of experts is here to help you every step of the way.
                 </p>
               </div>
 
               <div className="flex flex-wrap gap-4">
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button size="lg" className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white">
-                    <Phone className="w-4 h-4 mr-2" />
-                    Call Now
-                  </Button>
+                {/* Call Now Button */}
+                <motion.div
+                  whileHover={{ scale: 1.05 }}
+                  whileTap={{ scale: 0.95 }}
+                >
+                  <a href="tel:+919825283308">
+                    <Button
+                      size="lg"
+                      className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white"
+                    >
+                      <Phone className="w-4 h-4 mr-2" />
+                      Call Now
+                    </Button>
+                  </a>
                 </motion.div>
-                <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                  <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary hover:text-white">
-                    <MessageCircle className="w-4 h-4 mr-2" />
-                    Live Chat
-                  </Button>
-                </motion.div>
+
+                {/* Hide Live Chat Button since feature is not available */}
+                {/* You can enable this once you implement live chat */}
+                {/* <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
+        <Button
+          variant="outline"
+          size="lg"
+          className="border-primary text-primary hover:bg-primary hover:text-white"
+          disabled
+        >
+          <MessageCircle className="w-4 h-4 mr-2" />
+          Live Chat
+        </Button>
+      </motion.div> */}
               </div>
             </motion.div>
 
@@ -435,8 +390,15 @@ function Contact() {
               transition={{ duration: 0.8, delay: 0.4 }}
               className="relative"
             >
-              <div className="w-full h-[400px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary/10 to-accent/10">
-                <ContactScene />
+              <div className="w-full h-[400px] rounded-2xl overflow-hidden shadow-2xl bg-gradient-to-br from-primary/10 to-accent/10 flex justify-center items-center">
+                <Image
+                  src="/icons/contact.png"
+                  width={300}
+                  height={300}
+                  alt="contact Us"
+                  style={{ objectFit: "contain" }}
+                  className="mx-auto"
+                />
               </div>
             </motion.div>
           </div>
@@ -452,7 +414,9 @@ function Contact() {
       >
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge variant="secondary" className="mb-4">Contact Information</Badge>
+            <Badge variant="secondary" className="mb-4">
+              Contact Information
+            </Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               Multiple Ways to{" "}
               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -472,13 +436,18 @@ function Contact() {
               >
                 <Card className="h-full p-6 hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-white to-gray-50 dark:from-gray-900 dark:to-gray-800">
                   <div className="text-center space-y-4">
-                    <div className={`w-16 h-16 bg-gradient-to-br ${info.gradient} rounded-xl flex items-center justify-center text-white shadow-lg mx-auto`}>
+                    <div
+                      className={`w-16 h-16 bg-gradient-to-br ${info.gradient} rounded-xl flex items-center justify-center text-white shadow-lg mx-auto`}
+                    >
                       {info.icon}
                     </div>
                     <h3 className="text-xl font-bold">{info.title}</h3>
                     <div className="space-y-2">
                       {info.details.map((detail, idx) => (
-                        <p key={idx} className="text-muted-foreground text-sm leading-relaxed">
+                        <p
+                          key={idx}
+                          className="text-muted-foreground text-sm leading-relaxed"
+                        >
                           {detail}
                         </p>
                       ))}
@@ -507,7 +476,9 @@ function Contact() {
               className="space-y-8"
             >
               <div>
-                <Badge variant="secondary" className="mb-4">Send Us a Message</Badge>
+                <Badge variant="secondary" className="mb-4">
+                  Send Us a Message
+                </Badge>
                 <h2 className="text-3xl md:text-4xl font-bold mb-6">
                   Get a{" "}
                   <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -515,8 +486,8 @@ function Contact() {
                   </span>
                 </h2>
                 <p className="text-lg text-muted-foreground mb-8">
-                  Have a specific requirement or question? Fill out the form and our team 
-                  will get back to you within 24 hours.
+                  Have a specific requirement or question? Fill out the form and
+                  our team will get back to you within 24 hours.
                 </p>
               </div>
 
@@ -535,7 +506,9 @@ function Contact() {
                     </div>
                     <div>
                       <h4 className="font-semibold mb-2">{reason.title}</h4>
-                      <p className="text-muted-foreground text-sm">{reason.description}</p>
+                      <p className="text-muted-foreground text-sm">
+                        {reason.description}
+                      </p>
                     </div>
                   </motion.div>
                 ))}
@@ -572,7 +545,9 @@ function Contact() {
       >
         <div className="container mx-auto px-4">
           <div className="text-center mb-16">
-            <Badge variant="secondary" className="mb-4">Find Us</Badge>
+            <Badge variant="secondary" className="mb-4">
+              Find Us
+            </Badge>
             <h2 className="text-3xl md:text-4xl font-bold mb-6">
               Visit Our{" "}
               <span className="bg-gradient-to-r from-primary to-accent bg-clip-text text-transparent">
@@ -592,14 +567,23 @@ function Contact() {
                 <MapPin className="w-16 h-16 text-primary mx-auto" />
                 <h3 className="text-2xl font-bold">Interactive Map</h3>
                 <p className="text-muted-foreground">
-                  Jay Khodiyar Bearings<br />
-                  123 Industrial Estate, Rajkot<br />
+                  Jay Khodiyar Bearings
+                  <br />
+                  opposite of lathi plot 6, aayodhaypuri main road, morbi,
+                  Rajkot
+                  <br />
                   Gujarat 360001, India
                 </p>
-                <Button className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white">
-                  Get Directions
-                  <ArrowRight className="w-4 h-4 ml-2" />
-                </Button>
+                <a
+                  href="https://www.google.com/maps/search/?api=1&query=opposite+of+lathi+plot+6,+aayodhaypuri+main+road,+morbi,+Gujarat,+India"
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  <Button className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white">
+                    Get Directions
+                    <ArrowRight className="w-4 h-4 ml-2" />
+                  </Button>
+                </a>
               </div>
             </div>
           </motion.div>
@@ -623,7 +607,10 @@ function Contact() {
             <div className="flex justify-center mb-6">
               <div className="flex gap-1">
                 {[...Array(5)].map((_, i) => (
-                  <Star key={i} className="w-8 h-8 text-yellow-500 fill-current" />
+                  <Star
+                    key={i}
+                    className="w-8 h-8 text-yellow-500 fill-current"
+                  />
                 ))}
               </div>
             </div>
@@ -634,21 +621,41 @@ function Contact() {
               </span>
             </h3>
             <p className="text-xl text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-              Don't wait any longer. Contact us today and let's discuss how we can 
-              help solve your bearing needs with precision and excellence.
+              Don't wait any longer. Contact us today and let's discuss how we
+              can help solve your bearing needs with precision and excellence.
             </p>
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button size="lg" className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white px-8 py-4">
-                  Call +91 9825283308
-                  <Phone className="w-5 h-5 ml-2" />
-                </Button>
+              {/* Call Button */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <a href="tel:+919825283308">
+                  <Button
+                    size="lg"
+                    className="bg-gradient-to-r from-primary to-accent hover:from-primary/90 hover:to-accent/90 text-white px-8 py-4"
+                  >
+                    Call +91 9825283308
+                    <Phone className="w-5 h-5 ml-2" />
+                  </Button>
+                </a>
               </motion.div>
-              <motion.div whileHover={{ scale: 1.05 }} whileTap={{ scale: 0.95 }}>
-                <Button variant="outline" size="lg" className="border-primary text-primary hover:bg-primary hover:text-white px-8 py-4">
-                  <Mail className="w-5 h-5 mr-2" />
-                  Email Us
-                </Button>
+
+              {/* Email Button */}
+              <motion.div
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+              >
+                <a href="mailto:jaykhodiyar@gmail.com">
+                  <Button
+                    variant="outline"
+                    size="lg"
+                    className="border-primary text-primary hover:bg-primary hover:text-white px-8 py-4"
+                  >
+                    <Mail className="w-5 h-5 mr-2" />
+                    Email Us
+                  </Button>
+                </a>
               </motion.div>
             </div>
           </motion.div>

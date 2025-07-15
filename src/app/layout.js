@@ -27,7 +27,7 @@ export default function RootLayout({ children }) {
       <body className={`${geistSans.variable} ${geistMono.variable}`}>
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem>
           <Navbar />
-          {children}
+          <main className="overflow-x-hidden">{children}</main>
           <Footer />
         </ThemeProvider>
       </body>
