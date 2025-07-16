@@ -40,7 +40,7 @@ const faqData = [
   {
     category: "General",
     icon: <HelpCircle className="w-5 h-5" />,
-    color: "from-blue-500 to-blue-600",
+    color: "from-emerald-500 to-emerald-600",
     questions: [
       {
         question: "What is Jay Khodiyar Bearings?",
@@ -63,7 +63,7 @@ const faqData = [
   {
     category: "Products",
     icon: <Package className="w-5 h-5" />,
-    color: "from-green-500 to-green-600",
+    color: "from-blue-500 to-blue-600",
     questions: [
       {
         question: "What types of bearings do you supply?",
@@ -86,7 +86,7 @@ const faqData = [
   {
     category: "Orders & Delivery",
     icon: <Truck className="w-5 h-5" />,
-    color: "from-orange-500 to-orange-600",
+    color: "from-amber-500 to-amber-600",
     questions: [
       {
         question: "How can I place an order?",
@@ -109,7 +109,7 @@ const faqData = [
   {
     category: "Quality & Warranty",
     icon: <Shield className="w-5 h-5" />,
-    color: "from-red-500 to-red-600",
+    color: "from-green-500 to-green-600",
     questions: [
       {
         question: "Are your bearings genuine?",
@@ -155,7 +155,7 @@ const faqData = [
   {
     category: "Pricing & Payment",
     icon: <Calculator className="w-5 h-5" />,
-    color: "from-yellow-500 to-yellow-600",
+    color: "from-rose-500 to-rose-600",
     questions: [
       {
         question: "How do you determine pricing?",
@@ -235,7 +235,7 @@ function FAQCategory({ category, isExpanded, onToggle }) {
       transition={{ duration: 0.6 }}
       className="mb-8"
     >
-      <Card className="overflow-hidden border-0 shadow-lg">
+      <Card className={`overflow-hidden border-0 shadow-lg bg-gradient-to-r ${category.color}`}>
         <CardHeader
           className={`cursor-pointer bg-gradient-to-r ${category.color} text-white hover:opacity-90 transition-opacity`}
           onClick={onToggle}
@@ -263,9 +263,9 @@ function FAQCategory({ category, isExpanded, onToggle }) {
               animate={{ opacity: 1, height: "auto" }}
               exit={{ opacity: 0, height: 0 }}
               transition={{ duration: 0.3 }}
-              className="overflow-hidden"
+              className="overflow-hidden bg-white dark:bg-gray-800"
             >
-              <CardContent className="p-0">
+              <CardContent className="p-0 bg-transparent">
                 {category.questions.map((faq, index) => (
                   <FAQItem
                     key={index}
@@ -570,24 +570,37 @@ export default function FAQ() {
             </motion.div>
 
             <motion.div
-              initial={{ opacity: 0, y: 30 }}
-              whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.6, delay: 0.1 }}
-              whileHover={{ scale: 1.05 }}
-            >
-              <Card className="h-full p-8 text-center hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20">
-                <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center text-white shadow-lg mx-auto mb-6">
-                  <MessageCircle className="w-8 h-8" />
-                </div>
-                <h3 className="text-xl font-bold mb-4">Live Chat</h3>
-                <p className="text-muted-foreground mb-6">
-                  Get instant answers through our live chat support.
-                </p>
-                <Button className="bg-gradient-to-r from-green-500 to-green-600 hover:from-green-600 hover:to-green-700 text-white">
-                  Start Chat
-                </Button>
-              </Card>
-            </motion.div>
+  initial={{ opacity: 0, y: 30 }}
+  whileInView={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6, delay: 0.1 }}
+  whileHover={{ scale: 1.05 }}
+>
+  <Card className="h-full p-8 text-center hover:shadow-xl transition-all duration-300 border-0 bg-gradient-to-br from-green-50 to-green-100 dark:from-green-900/20 dark:to-green-800/20">
+    <div className="w-16 h-16 bg-gradient-to-br from-green-500 to-green-600 rounded-xl flex items-center justify-center text-white shadow-lg mx-auto mb-6">
+      <MessageCircle className="w-8 h-8" />
+    </div>
+    <h3 className="text-xl font-bold mb-4">Live Chat</h3>
+    <p className="text-muted-foreground mb-6">
+      Get instant answers through our live chat support.
+    </p>
+
+    {/* Message above the disabled button */}
+    <div className="flex flex-col items-center ">
+      <span className="text-xs text-red-500 mb-2">
+        this is temporarily shutdown
+      </span>
+      <div className="cursor-not-allowed">
+      <Button
+        desabled
+        className="bg-gradient-to-r from-green-500 to-green-600 text-white opacity-60 cursor-not-allowed"
+      >
+        Start Chat
+      </Button>
+      </div>
+    </div>
+  </Card>
+</motion.div>
+
 
             <motion.div
               initial={{ opacity: 0, y: 30 }}

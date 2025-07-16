@@ -241,7 +241,7 @@ export default function Navbar() {
               className="flex items-center gap-3"
             >
               {/* Enhanced Search */}
-              <motion.div
+              {/* <motion.div
                 variants={searchVariants}
                 animate={searchFocused ? "focused" : "unfocused"}
                 className="relative hidden md:block"
@@ -269,7 +269,7 @@ export default function Navbar() {
                     </motion.div>
                   )}
                 </AnimatePresence>
-              </motion.div>
+              </motion.div> */}
 
               {/* Enhanced Theme Toggle */}
               {mounted && (

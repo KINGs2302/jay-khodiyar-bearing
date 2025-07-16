@@ -96,7 +96,7 @@ function Timeline() {
       description:
         "Launched an online billings system to enhance customer service and streamline operations.",
       icon: <Zap className="w-4 h-4" />,
-      color: "from-red-500 to-red-600",
+      color: "from-rose-500 to-rose-600",
     },
     {
       year: "2024",
@@ -194,21 +194,21 @@ export default function About() {
       title: "Customer Focused",
       description:
         "Your success is our priority. We build lasting relationships based on trust and reliability.",
-      gradient: "from-red-500 to-red-600",
+      gradient: "from-amber-500 to-rose-600",
     },
     {
       icon: <Lightbulb className="w-8 h-8" />,
       title: "Innovation Driven",
       description:
         "We continuously evolve with technology to provide cutting-edge bearing solutions.",
-      gradient: "from-yellow-500 to-yellow-600",
+      gradient: "from-amber-500 to-purple-600",
     },
     {
       icon: <Handshake className="w-8 h-8" />,
       title: "Integrity",
       description:
         "Honest business practices and transparent communication form the foundation of our operations.",
-      gradient: "from-green-500 to-green-600",
+      gradient: "from-emerald-500 to-emerald-600",
     },
   ];
 
